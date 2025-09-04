@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from home.models import News
 
 # Create your views here.
@@ -15,3 +15,8 @@ def contact(request):
 def allnews(request):
     article=News.objects.all()
     return(render(request,'all_news.html',{'articles':article}))
+
+def detailnews(request, id):
+    context = get_object_or_404(News, pk = id)
+    detail = {'detail': context}
+    return render(request, 'detail_news.html', detail)

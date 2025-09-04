@@ -80,7 +80,7 @@
   <div class="card-body">
     <h5 class="card-title">{{articles.title| truncatewords:3}}</h5> 
     <p class="card-text">{{articles.description| truncatewords:10}}</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <a href="{% url 'detailnews' articles.id %}" class="btn btn-primary">Go somewhere</a>
   </div>
 </div>
 </div>
