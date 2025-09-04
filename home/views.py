@@ -1,11 +1,17 @@
 from django.shortcuts import render
+from home.models import News
 
 # Create your views here.
 def home_view(request):
-    return render(request, "index.html")
+    latest_article=News.objects.order_by('-date')[:9]
+    return render(request, "index.html",{'articles':latest_article})
 
 def about(request):
     return(render(request,'about.html'))
 
 def contact(request):
     return(render(request,'contactus.html'))
+
+def allnews(request):
+    article=News.objects.all()
+    return(render(request,'all_news.html',{'articles':article}))
