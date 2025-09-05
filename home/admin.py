@@ -5,6 +5,7 @@ from django.db.models import Count
 from . import models
 
 @admin.register(models.News)
+
 class NewsAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'likes', 'date', 'image', 'comment_count')  
 
@@ -26,3 +27,4 @@ class NewsAdmin(admin.ModelAdmin):
 @admin.register(models.Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('id', 'name','body', 'date')   
+
