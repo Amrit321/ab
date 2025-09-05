@@ -8,5 +8,17 @@ class News(models.Model):
     likes = models.PositiveBigIntegerField()
 
     def __str__(self):
-        return self.title 
+        return self.title
+      
+      
     
+class Comment(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    body = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+    post = models.ForeignKey(News, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
