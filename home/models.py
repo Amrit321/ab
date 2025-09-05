@@ -8,4 +8,5 @@ class News(models.Model):
     likes = models.PositiveBigIntegerField()
 
     def __str__(self):
-        return self.title
+        return self.title 
+    

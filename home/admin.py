@@ -5,4 +5,4 @@ from . import models
 
 @admin.register(models.News)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'likes', 'date', 'image')   
+    list_display = ('id', 'title', 'likes', 'date', 'image')  
