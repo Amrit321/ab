@@ -9,8 +9,6 @@ from . import models
 @admin.register(models.News)
 class NewsAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'likes', 'date', 'image', 'comment_count')  
-
-    
     
     def comment_count(self, obj):
         link = (reverse('admin:home_comment_changelist')
