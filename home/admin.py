@@ -10,7 +10,9 @@ from . import models
 class NewsAdmin(admin.ModelAdmin):
 
     list_display = ('id', 'title', 'likes', 'date', 'image', 'comment_count')
-    search_fields = ('title',)  
+    search_fields = ('title',) 
+    list_filter   = ('date', 'title',) 
+    
 
     
     
@@ -27,6 +29,8 @@ class NewsAdmin(admin.ModelAdmin):
             comment_count=Count('comment')
             
             )
+     # ✅ Enable sorting by comment count
+    comment_count.admin_order_field = 'comment_count'
 
 
     
@@ -38,7 +42,8 @@ class NewsAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('id', 'name','body', 'date', 'post')
     autocomplete_fields = ['post']
-    search_fields = ('name', 'post__title',) 
+    search_fields = ('name', 'post__title',)
+    list_filter   = ('date','post__title') 
    
    
   
