@@ -8,7 +8,11 @@ from . import models
 
 @admin.register(models.News)
 class NewsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'likes', 'date', 'image', 'comment_count')  
+
+    list_display = ('id', 'title', 'likes', 'date', 'image', 'comment_count')
+    search_fields = ('title',)  
+
+    
     
     def comment_count(self, obj):
         link = (reverse('admin:home_comment_changelist')
@@ -32,5 +36,10 @@ class NewsAdmin(admin.ModelAdmin):
 
 @admin.register(models.Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name','body', 'date', 'post')   
+    list_display = ('id', 'name','body', 'date', 'post')
+    autocomplete_fields = ['post']
+    search_fields = ('name', 'post__title',) 
+   
+   
+  
 
