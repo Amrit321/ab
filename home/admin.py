@@ -8,6 +8,7 @@ from . import models
 
 @admin.register(models.News)
 class NewsAdmin(admin.ModelAdmin):
+
     list_display = ('id', 'title', 'likes', 'date', 'image', 'comment_count')
     search_fields = ('title',)  
 
