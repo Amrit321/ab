@@ -1,8 +1,8 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from home.forms import NewsForm
-from home.models import News
+from home.models import News, Comment
+from .forms import NewsForm
 
 # Create your views here.
 def home_view(request):
@@ -19,23 +19,25 @@ def allnews(request):
     article=News.objects.all()
     return(render(request,'all_news.html',{'articles':article}))
 
+
+
 def detailnews(request, id):
-    context = get_object_or_404(News, pk = id)
-    detail = {'detail': context}
-    return render(request, 'detail_news.html', detail)
-
-
-def newsform(request):
+    news = get_object_or_404(News, pk = id)
+    comment = news.comment_set.all()
+    comment_count = comment.all().count()
+    # detail = {'detail': news}
     if request.method == "POST":
         # create a form instance and populate it with data from the request:
         form = NewsForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
-            form.save()
+            comment_post = form.save(commit=False)
+            comment_post.post = news
+            comment_post.save()
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
-            return redirect(reverse('news_form'))
+            return redirect('detailnews', id = id)
         
 
 
@@ -43,4 +45,16 @@ def newsform(request):
     else:
         form = NewsForm()
 
-    return render(request, "form.html", {"form": form})
+
+
+    context = {
+        'news': news,
+        'form': form,
+        'comments': comment,
+        'total_comment': comment_count
+        
+    }
+    # return render(request, "form.html", {"form": form})
+    return render(request, 'detail_news.html', context)
+
+
