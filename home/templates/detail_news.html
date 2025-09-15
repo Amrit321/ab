@@ -31,7 +31,10 @@
          {{ news.description }}
       </p>
     </div>
-
+<button id="toggle-comments-btn">
+    Show Comments ({{ total_comment }})
+</button>
+<div id="comments-section" style="display:none; margin-top:20px;">
      <div class="fs-12 lh-lg">
       <h2> {{ total_comment }} Comments</h2>
 
@@ -45,7 +48,7 @@
       </p>
       {% endfor %}
     </div>
-
+</div>
     <h1>Post comment</h1>
 <form action="" method="post" class="mt-4">
     {% csrf_token %}
@@ -55,10 +58,23 @@
     <button type="submit" class="btn btn-primary">Post Comment</button>
 </form><br>
   </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const btn = document.getElementById('toggle-comments-btn');
+  const section = document.getElementById('comments-section');
+
+  btn.addEventListener('click', function () {
+    if (section.style.display === 'none') {
+        section.style.display = 'block';
+        btn.textContent = 'Hide Comments';
+    } else {
+        section.style.display = 'none';
+        btn.textContent = 'Show Comments ({{ total_comment }})';
+    }
+  });
+});
+</script>
  
-
-
-
-
 {% endblock %}
 
