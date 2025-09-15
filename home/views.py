@@ -58,3 +58,13 @@ def detailnews(request, id):
     return render(request, 'detail_news.html', context)
 
 
+
+
+
+
+def newhome(request):
+    return(render(request,'newhomepage.html'))
+
+
+def newdetail(request):
+    return(render(request,'newdetailpage.html'))
