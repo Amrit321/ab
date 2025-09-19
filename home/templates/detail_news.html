@@ -21,23 +21,34 @@
 
               <!-- Like Button (Without AJAX) -->
               <form method="POST" action="">
-                <button type="submit" class="btn btn-outline-danger">
-                  <i class="fa fa-heart"></i> Like
-                </button>
-                <span>2</span> Likes
-              </form>
-
-              <!-- Comment Count -->
-              <div class="mt-2">
-                <i class="fa fa-comment text-primary"></i>
-                <span>{{ total_comment }}</span> Comments
+                
+                              <div class="d-flex col-md-3 align-items-center justify-content-between">
+              
+                <!-- Like Button -->
+                <div>
+                  
+                    <i class="fa fa-heart text-danger"></i>
+                  
+                  <span class="like-count">3</span>
+                </div>
+  
+                <!-- Comment Count -->
+                <div>
+                  <i class="fa fa-comment text-primary"></i>
+                  {% if total_comment %}
+                  <span class="comment-count">{{ total_comment }}</span>
+                  {% else %}
+                  <span class="comment-count">0</span>
+                  {% endif %}
+                </div>
+  
               </div>
             </div>
           </div>
 
           <!-- Comments Section -->
           <div class="mt-4">
-            <h4>Comments ({{ total_comment }})</h4>
+            <h4>All Comments</h4>
             {% for comment in comments %}
             <ul class="list-group">
               <li class="list-group-item">

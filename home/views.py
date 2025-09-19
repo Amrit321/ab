@@ -1,14 +1,17 @@
+from itertools import count
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from home.models import News, Comment
 from .forms import NewsForm
+from django.db.models import Count
 
 # Create your views here.
 def home_view(request):
-    latest_article=News.objects.order_by('-date')[:9]
-    return render(request, "index.html",{'articles':latest_article})
-
+    articles = News.objects.annotate(comment_count=Count('comment')).order_by('-date')[:9]
+    context = {"articles": articles}
+    return render(request, "index.html", context)
+    
 def about(request):
     return(render(request,'about.html'))
 
@@ -16,7 +19,7 @@ def contact(request):
     return(render(request,'contactus.html'))
 
 def allnews(request):
-    article=News.objects.all()
+    article=News.objects.annotate(comment_count=Count('comment')).all()
     return(render(request,'all_news.html',{'articles':article}))
 
 

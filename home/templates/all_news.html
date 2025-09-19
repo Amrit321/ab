@@ -26,16 +26,20 @@
               
                 <!-- Like Button -->
                 <div>
-                  <button class="btn btn-outline-danger btn-sm me-2 like-btn" data-post-id="">
-                    <i class="fa fa-heart"></i> Like
-                  </button>
-                  <span class="like-count">2</span> Likes
+                  
+                    <i class="fa fa-heart text-danger"></i>
+                  
+                  <span class="like-count">3</span>
                 </div>
   
                 <!-- Comment Count -->
                 <div>
                   <i class="fa fa-comment text-primary"></i>
-                  <span class="comment-count">5</span> Comments
+                  {% if articles.comment_count %}
+                  <span class="comment-count">{{ articles.comment_count }}</span>
+                  {% else %}
+                  <span class="comment-count">0</span>
+                  {% endif %}
                 </div>
   
               </div>
